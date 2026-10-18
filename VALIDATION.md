@@ -1,6 +1,6 @@
 # Validation record
 
-Date: 2026-10-18. Reference application: the user's installed Windows PrusaSlicer 3.0.0-alpha12. Source repository baseline: `2b5f86f` (`main`). Native profile source: preserved local INI version 1.4.2.
+Date: 2026-10-18. Reference application: the user's installed Windows PrusaSlicer 3.0.0-alpha12. Initial source repository baseline: `2b5f86f`; nozzle-consolidation baseline: `646a173` (`main`). Native profile source: preserved local INI version 1.4.2. Current profile package: `3.0.0-alpha2`.
 
 ## Repeatable checks
 
@@ -10,14 +10,16 @@ With `--slicer`, it creates a fresh test data directory and:
 
 1. Adds `kingroon-fff.zip` using `--preset-update-add-local` and installs it using `--preset-update`.
 2. Compares the installed YAML bytes with the generated archive.
-3. Queries printer discovery: four model names and 20 model/nozzle configurations.
-4. Queries compatible process, tool and material profiles for each configuration, checking nozzle filters.
-5. Slices a 10 mm cube for every configuration and requires an actual nonempty G-code file. Checks `G28`, `M83`, PLA heating commands, and `G29` only for BLTouch configurations.
+3. Queries printer discovery: exactly four entries, each defaulting to 0.4 mm, with five unconditional nozzle tool definitions in the bundle.
+4. Instantiates each hardware template with each available nozzle in the disposable test copy and queries compatible process, tool and material profiles, checking nozzle filters. Alpha12's CLI has no nozzle-selector argument, so the test changes only the test copy's template tool references between runs. It restores the distributed defaults afterward; the released ZIP always contains four templates with a 0.4 mm default.
+5. Exports the resolved configuration and slices a 10 mm cube for all 20 model/nozzle combinations. Checks actual nozzle diameter, nozzle-dependent default process, a nonempty G-code file, `G28`, `M83`, PLA heating commands, and `G29` only for BLTouch configurations.
 6. Exports resolved configurations for AmazonBasics TPU, Prusament TPU 95A and Alzament TPU 95A, checking filament retraction overrides.
 
 Logs and generated G-code stay under `.validation/`. A completed run writes `.validation/summary.json`. CI publishes this summary with the installable ZIP and migration report.
 
-The software checks passed locally for all 20 model/nozzle configurations and all three TPU override checks. They cover one representative process/material slice per hardware configuration, not every process/material combination.
+The local upgrade check also imported the alpha2 ZIP over a disposable alpha1 installation. The updater installed `3.0.0-alpha2`, and the next model query returned exactly four entries, each defaulting to 0.4 mm.
+
+All four printer-entry checks, 20 model/nozzle slices, nozzle-dependent default-process checks and three TPU override checks passed locally. They cover one representative process/material slice per combination, not every process/material combination. They do not automate clicking the GUI nozzle selector.
 
 ## Findings incorporated into the conversion
 

@@ -18,7 +18,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "kingroon-fff"
 VENDOR = "Kingroon"
-VERSION = "3.0.0-alpha1"
+VERSION = "3.0.0-alpha2"
 SOURCE = ROOT / "legacy/1.4.2/Kingroon.ini"
 SCHEMA = ROOT / "schema/3.0.0-alpha12.json"
 NAMESPACE = uuid.UUID("01895621-e18c-4eb6-8131-827d83c8c3c1")
@@ -141,9 +141,9 @@ def convert(config):
         return output
 
     vendor = [{"kind": "vendor", "id": VENDOR, "name": "Kingroon", "version": VERSION,
-               "features": {"printer": {}, "tool": {"nozzle_diameter": {"default": 0.4}}},
+               "features": {"printer": {}, "tool": {"nozzle_diameter": {"default": 0.4, "user_editable": False}}},
                "printer_families": [{"label": "Kingroon", "base_model": "KINGROON",
-                                     "printer_configs_order": [f"{model}-{nozzle}" for model in MODELS for nozzle in NOZZLES]}]}]
+                                     "printer_configs_order": list(MODELS)}]}]
     for model in MODELS:
         info = config[f"printer_model:{model}"]
         visual = {key: info[key] for key in ("bed_model", "bed_texture") if info.get(key)}
@@ -152,10 +152,9 @@ def convert(config):
         vendor.append({"kind": "printer", "id": model, "name": info["name"],
                        "technology": "FFF", "model": {"base_model": "KINGROON", "model": model},
                        "tool_count": 1, "visual": visual})
-        for nozzle in NOZZLES:
-            vendor.append({"kind": "printer_config", "id": f"{model}-{nozzle}", "name": info["name"],
-                           "printer": model, "legacy_printer_model": [model], "tool_count": 1,
-                           "tools": [{"tool": nozzle}], "sheet": "stock"})
+        vendor.append({"kind": "printer_config", "id": model, "name": info["name"],
+                       "printer": model, "legacy_printer_model": [model], "tool_count": 1,
+                       "tools": [{"tool": "0.4"}], "sheet": "stock"})
     for nozzle in NOZZLES:
         vendor.append({"kind": "tool", "id": nozzle, "name": f"{nozzle} mm",
                        "technology": "FFF", "features": {"nozzle_diameter": {"default": float(nozzle)}}})
@@ -216,6 +215,8 @@ def convert(config):
     report["omitted"] = {k: sorted(v) for k, v in sorted(report["omitted"].items())}
     report["public_presets"] = {kind: len(names) for kind, names in public.items()}
     report["hardware_models"] = len(MODELS)
+    report["hardware_templates"] = len(MODELS)
+    report["default_nozzle"] = "0.4"
     report["nozzles"] = list(NOZZLES)
     return {"vendor.yaml": vendor, "printer.yaml": printers, "print.yaml": prints,
             "filament.yaml": filaments, "tool-print.yaml": tool_print}, report

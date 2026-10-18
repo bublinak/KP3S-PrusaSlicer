@@ -32,13 +32,14 @@ jobs:
           $slicerExe = Get-ChildItem "$env:RUNNER_TEMP/slicer" -Filter PrusaSlicer.exe -Recurse | Select-Object -First 1
           if (-not $slicerExe) { throw 'PrusaSlicer.exe was not found in the release ZIP' }
           "SLICER_EXE=$($slicerExe.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-      - name: Verify archive, install it and slice every hardware variant
+      - name: Verify four printer entries and slice all nozzle choices
         shell: pwsh
         run: python tools/validate.py --slicer "$env:SLICER_EXE"
       - name: Upload installable profiles and migration report
         uses: actions/upload-artifact@v4
         with:
           name: kingroon-prusaslicer3
+          include-hidden-files: true
           path: |
             dist/kingroon-fff.zip
             dist/migration-report.json
@@ -49,6 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kingroon-validation-logs
+          include-hidden-files: true
           path: .validation/
       - name: Prepare Pages artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
