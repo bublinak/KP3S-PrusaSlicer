@@ -1,166 +1,28 @@
-# Kingroon KP3S 3.0 & KP3S Pro S1 Prusa Profiles
+# Kingroon profiles for PrusaSlicer 3
 
-**PrusaSlicer 3.0.0-alpha12:** use the native YAML repository and GitHub build instructions in [PRUSASLICER3.md](PRUSASLICER3.md). The installation instructions below describe the original PrusaSlicer 2.x INI bundle.
-PrusaSlicer profiles for Kingroon KP3S 3.0 (Titan Extruder) & KP3S Pro S1, also includes a version for BLTouch.
+Native profile repository for **PrusaSlicer 3.0.0-alpha12**, maintained in [bublinak/KP3S-PrusaSlicer](https://github.com/bublinak/KP3S-PrusaSlicer). Changes remain in this fork while they are being tested; no upstream pull request is part of this workflow.
 
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/banner.PNG)
+Supports Kingroon KP3S 3.0 and KP3S Pro S1, each with standard and BLTouch configurations and 0.2, 0.3, 0.4, 0.5 and 0.6 mm nozzles. The package contains 20 hardware configurations, 82 process presets and 42 material presets.
 
-[Image Showcase!](https://github.com/RyanT95/KP3S-Prusa#images)
+## Install through PrusaSlicer
 
-## How to use
-* Download the [latest release.](https://github.com/RyanT95/KP3S-Prusa/releases/latest)
+1. Download **[kingroon-fff.zip](https://bublinak.github.io/KP3S-PrusaSlicer/kingroon-fff.zip)** after the Pages deployment has completed. If Pages is not available, use the tested local build or the `kingroon-prusaslicer3` artifact from a successful [GitHub Actions run](https://github.com/bublinak/KP3S-PrusaSlicer/actions/workflows/profiles.yml).
+2. In PrusaSlicer, open **Preset sources & updates**.
+3. Under **Local sources**, click **Add ZIP** and select `kingroon-fff.zip`.
+4. Apply the Kingroon installation offered by PrusaSlicer.
+5. Select your printer model, installed nozzle and process/material presets.
 
-* Extract the ZIP and move the **'Kingroon.idx'** & **'Kingroon.ini'** files and the **'Kingroon'** folder to: ```<PRUSA-INSTALL-DIR>\Prusa3D\PrusaSlicer\resources\profiles```
+Keep `kingroon-fff.zip` intact. If downloading an Actions artifact, extract the outer artifact ZIP first, then select the inner `kingroon-fff.zip`. GitHub's **Code → Download ZIP** is the source repository, not an importable profile package.
 
-* *'Kingroon'* should now show up in the *'Other Vendors'* section of the Configuration Wizard.
+Updates use the same built-in ZIP importer with a newer package. Installed profiles work locally; automatic online update registration with Prusa is not configured.
 
-* Select this, and choose from either *'Kingroon KP3S 3.0'*, *'Kingroon KP3S BLTouch'*, *'Kingroon KP3S Pro S1'* or *'Kingroon KP3S Pro S1 BLTouch'*.
+## Testing and maintenance
 
-* You can select configurations for *0.2mm, 0.3mm, 0.4mm, 0.5mm & 0.6mm* nozzles.
+The package was installed and all 20 configurations were sliced with alpha12 in an isolated data directory. Three TPU retraction checks passed. Physical printer testing is still pending. Select the BLTouch variant only for a machine equipped and configured for it.
 
-* Select the filament profiles you want to enable from the next screen, then change any other settings and click *Finish*.
+- [Build, install and GitHub Pages details](PRUSASLICER3.md)
+- [Executed checks and limitations](VALIDATION.md)
+- [Attribution and licensing](ATTRIBUTION.md)
+- [Historical PrusaSlicer 2.x documentation](docs/LEGACY-PRUSASLICER2.md)
 
-* The KP3S is now added to Prusa as a printer, I have also included a custom buildplate and bed texture with a 10mm grid to aid in object placement.
-
-* For the KP3S 3.0, I have included an alternate bed texture that doesn't have the X and Y axis helper, and an alternate bed model & texture for the original Kingroon build plate. 
-  * To use the alternate texture, change lines *34* and *53* in *'Kingroon.ini'* from ```bed_texture = kp3s.svg``` to ```bed_texture = kp3s-alt.svg```
-  * To use the Kingroon texture, change lines *29* and *48* in *'Kingroon.ini'* from ```bed_model = kp3s_bed.stl``` to ```bed_model = kp3s_bed_original.stl```, and lines *34* and *53* from ```bed_texture = kp3s.svg``` to ```bed_texture = kp3s-original.svg```
-  
-  ![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/5.PNG)
-
-## How to update
-* Extract the ZIP and move the **'Kingroon.idx'** & **'Kingroon.ini'** files and the **'Kingroon'** folder to: ```<PRUSA-INSTALL-DIR>\Prusa3D\PrusaSlicer\resources\profiles```
-
-* Open PrusaSlicer, go to 'Configuration' and click 'Check for Configuration Updates'.
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/4.PNG)
-
-## Firmware
-I have only tested these profiles with Marlin firmware, but they should still work with the stock firmware.
-
-If you are still running stock firmware, I *strongly* suggest upgrading to Marlin, as the stock firmware isn't that great.
-
-* A link to the Marlin firmware for KP3S can be found [here.](https://github.com/bdwilson/KP3S)
-
-* A guide to installing the firmware can be found [here.](https://kingroon.com/blogs/3d-print-101/how-to-set-up-marlin-firmware-for-the-kingroon-kp3s-3d-printer)
-
-
-## Profile Information
-
-### Kingroon KP3S 3.0
-* Vendor: Kingroon
-* Extruder: Titan Direct Drive
-* Nozzles: 0.2mm, 0.3mm, 0.4mm, 0.5mm & 0.6mm
-* Print Profiles:
-  * 0.06mm ULTRADETAIL	*(0.2mm nozzle only)*
-  * 0.08mm SUPERDETAIL	*(0.2mm & 0.3mm nozzles only)*
-  * 0.10mm HIGHDETAIL	*(0.2mm, 0.3mm & 0.4mm nozzles only)*
-  * 0.12mm DETAIL		*(0.2mm, 0.3mm, 0.4mm & 0.5mm nozzles only)*
-  * 0.16mm OPTIMAL
-  * 0.20mm NORMAL		*(0.3mm, 0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.24mm DRAFT		*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.28mm SUPERDRAFT	*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.36mm CHUNKY		*(0.5mm & 0.6mm nozzles only)*
-  * 0.44mm SUPERCHUNKY	*(0.6mm nozzle only)*
-* Print Speeds:
-  * STANDARD
-  * SPEED
-  * HIGH SPEED
-  * SUPER SPEED
-* Upgrades: None
-* Firmware: Stock / Marlin 2.1.1
-
-### Kingroon KP3S BLTouch
-* Vendor: Kingroon
-* Extruder: Titan Direct Drive
-* Nozzles: 0.2mm, 0.3mm, 0.4mm, 0.5mm & 0.6mm
-* Print Profiles:
-  * 0.06mm ULTRADETAIL	*(0.2mm nozzle only)*
-  * 0.08mm SUPERDETAIL	*(0.2mm & 0.3mm nozzles only)*
-  * 0.10mm HIGHDETAIL	*(0.2mm, 0.3mm & 0.4mm nozzles only)*
-  * 0.12mm DETAIL		*(0.2mm, 0.3mm, 0.4mm & 0.5mm nozzles only)*
-  * 0.16mm OPTIMAL
-  * 0.20mm NORMAL		*(0.3mm, 0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.24mm DRAFT		*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.28mm SUPERDRAFT	*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.36mm CHUNKY		*(0.5mm & 0.6mm nozzles only)*
-  * 0.44mm SUPERCHUNKY	*(0.6mm nozzle only)*
-* Print Speeds:
-  * STANDARD
-  * SPEED
-  * HIGH SPEED
-  * SUPER SPEED
-* Upgrades: BLTouch auto bed leveling sensor
-* Firmware: Stock / Marlin 2.1.1
-
-### Kingroon KP3S Pro S1
-* Vendor: Kingroon
-* Extruder: Titan Direct Drive
-* Nozzles: 0.3mm, 0.4mm, 0.5mm & 0.6mm
-* Print Profiles:
-  * 0.06mm ULTRADETAIL	*(0.2mm nozzle only)*
-  * 0.08mm SUPERDETAIL	*(0.2mm & 0.3mm nozzles only)*
-  * 0.10mm HIGHDETAIL	*(0.2mm, 0.3mm & 0.4mm nozzles only)*
-  * 0.12mm DETAIL		*(0.2mm, 0.3mm, 0.4mm & 0.5mm nozzles only)*
-  * 0.16mm OPTIMAL
-  * 0.20mm NORMAL		*(0.3mm, 0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.24mm DRAFT		*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.28mm SUPERDRAFT	*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.36mm CHUNKY		*(0.5mm & 0.6mm nozzles only)*
-  * 0.44mm SUPERCHUNKY	*(0.6mm nozzle only)*
-* Print Speeds:
-  * STANDARD
-  * SPEED
-  * HIGH SPEED
-  * SUPER SPEED
-* Upgrades: None
-* Firmware: Stock / Marlin 2.1.1
-
-### Kingroon KP3S Pro S1 BLTouch
-* Vendor: Kingroon
-* Extruder: Titan Direct Drive
-* Nozzles: 0.3mm, 0.4mm, 0.5mm & 0.6mm
-* Print Profiles:
-  * 0.06mm ULTRADETAIL	*(0.2mm nozzle only)*
-  * 0.08mm SUPERDETAIL	*(0.2mm & 0.3mm nozzles only)*
-  * 0.10mm HIGHDETAIL	*(0.2mm, 0.3mm & 0.4mm nozzles only)*
-  * 0.12mm DETAIL		*(0.2mm, 0.3mm, 0.4mm & 0.5mm nozzles only)*
-  * 0.16mm OPTIMAL
-  * 0.20mm NORMAL		*(0.3mm, 0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.24mm DRAFT		*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.28mm SUPERDRAFT	*(0.4mm, 0.5mm & 0.6mm nozzles only)*
-  * 0.36mm CHUNKY		*(0.5mm & 0.6mm nozzles only)*
-  * 0.44mm SUPERCHUNKY	*(0.6mm nozzle only)*
-* Print Speeds:
-  * STANDARD
-  * SPEED
-  * HIGH SPEED
-  * SUPER SPEED
-* Upgrades: BLTouch auto bed leveling sensor
-* Firmware: Stock / Marlin 2.1.1
-
-
-## Images
-#### KP3S - Original
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3s-original.PNG)
-
-#### KP3S - Default
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3s.PNG)
-
-#### KP3S - Alternate 1
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3s-alt1.PNG)
-
-#### KP3S - Alternate 2
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3s-alt2.PNG)
-
-#### KP3S - Alternate 3
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3s-alt3.PNG)
-
-#### Pro S1 - Default
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3spros1.PNG)
-
-#### Pro S1 - Alternate 1
-![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/kp3spros1-alt1.PNG)
-
-
-## License
-This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License - see the [LICENSE.md](https://github.com/RyanT95/KP3S-Prusa/blob/main/LICENSE) file for details.
+The 2.x INI files are retained as source/reference material. The current PrusaSlicer 3 installation uses the native ZIP importer described above.

@@ -2,11 +2,11 @@
 
 This project builds a native **PrusaSlicer 3.0.0-alpha12** repository for Kingroon KP3S 3.0 and KP3S Pro S1, with separate BLTouch variants. Each model offers 0.2, 0.3, 0.4, 0.5 and 0.6 mm nozzles: 20 configurations, 82 process presets and 42 material presets.
 
-The existing root `Kingroon.ini`, `Kingroon.idx` and 2.x installation instructions remain intact. The 3.0 conversion uses the newer supplied INI version 1.4.2 in `legacy/1.4.2/`. Generated YAML and ZIPs are build products, not files to edit by hand.
+The existing root `Kingroon.ini` and `Kingroon.idx` remain intact as legacy references. The old installation instructions are archived in [docs/LEGACY-PRUSASLICER2.md](docs/LEGACY-PRUSASLICER2.md). The maintained installation uses PrusaSlicer's built-in ZIP importer. The 3.0 conversion uses the newer supplied INI version 1.4.2 in `legacy/1.4.2/`. Generated YAML and ZIPs are build products, not files to edit by hand.
 
 ## Download and install
 
-After the changes are merged and GitHub Pages has been enabled, the download will be available at:
+After a successful build and GitHub Pages deployment, the download is available at:
 
 [Kingroon repository ZIP](https://bublinak.github.io/KP3S-PrusaSlicer/kingroon-fff.zip)
 
@@ -24,7 +24,7 @@ Do not copy the old INI into `resources/profiles` for this version. Alpha12 uses
 
 ## GitHub setup
 
-For this fork, enable Actions if GitHub presents the initial fork-workflow confirmation. Under **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**. Merge the reviewed changes to `main`; the workflow builds, validates and publishes the files. A failed validation blocks deployment. Pull requests validate and upload build artifacts but do not deploy Pages.
+For this fork, enable Actions if GitHub presents the initial fork-workflow confirmation. Under **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**. Pushes to this fork's `main` build, validate and publish the files. A failed validation blocks deployment. No pull request to the original upstream repository is required or planned during testing. Optional pull requests within this fork validate and upload build artifacts but do not deploy Pages.
 
 The generated Pages site also contains versioned profile files, vendor indexes and SHA-256 manifests. These are useful distribution building blocks, but arbitrary remote-source registration remains unsupported by the standard alpha12 UI. A GitLab server can serve the same generated files later.
 
