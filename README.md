@@ -1,4 +1,6 @@
 # Kingroon KP3S 3.0 & KP3S Pro S1 Prusa Profiles
+
+**PrusaSlicer 3.0.0-alpha12:** use the native YAML repository and GitHub build instructions in [PRUSASLICER3.md](PRUSASLICER3.md). The installation instructions below describe the original PrusaSlicer 2.x INI bundle.
 PrusaSlicer profiles for Kingroon KP3S 3.0 (Titan Extruder) & KP3S Pro S1, also includes a version for BLTouch.
 
 ![Logo](https://github.com/RyanT95/KP3S-Prusa/blob/main/_screenshots/banner.PNG)
